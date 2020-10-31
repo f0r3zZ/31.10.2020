@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>31.10.2020</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <style>
+    body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Lato', sans-serif;
+        background-color: #f0f0f0;
+        overflow: hidden;
+    }
+
+    #btn {
+        font: inherit;
+        width: 250px;
+        height: 75px;
+        border: 2px solid #000;
+        background-color: #fff;
+        color: #000;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 35px;
+    }
+  </style>
+
+  <button id="btn">Start</button>
+</body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('btn');
+      let a,b,c,h, area;
+
+      const askNumbers = () => {
+          a = prompt('Введите длину первой стороны равнобедренного треугольника');
+          b = prompt('Введите длину второй стороны равнобедренного треугольника');
+          c = prompt('Введите длину третьей стороны равнобедренного треугольника');
+      }
+
+      function calcArea(a, c) {
+          h = Math.sqrt(a*a - c*c/4);
+          h = Math.round(h);
+          area = a * h;
+          area = Math.round(area);
+          alert(area);
+      }
+
+      btn.addEventListener('click', () => {
+          askNumbers();
+          let array = [a,b,c];
+          let mappedArray = array.map( number => number = parseInt(number) )
+          mappedArray.sort();
+          if (typeof(mappedArray[0]) === 'number' && typeof(mappedArray[1]) === 'number' && typeof(mappedArray[2]) === 'number') {
+              if (mappedArray[0] === mappedArray[1] && typeof(mappedArray[0])==='number' && typeof(mappedArray[1])==='number' ) {
+                  a = mappedArray[0];
+                  b = mappedArray[1];
+                  c = mappedArray[2];
+                  calcArea(b, c);
+              } else if (mappedArray[1] === mappedArray[2] && typeof(mappedArray[1])==='number' && typeof(mappedArray[2])==='number'  ) {
+                  a = mappedArray[1];
+                  b = mappedArray[2];
+                  c = mappedArray[0];
+                  calcArea(b, c);
+              } else {
+                  alert('Ошибка! Возможно, треугольник с такими сторонами не является равнобедренным!');
+                  askNumbers();
+              }
+          }
+      })
+  })
+
+</script>
+
+</html>
